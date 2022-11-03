@@ -9,6 +9,15 @@
 .main{
     padding: 36px;
 }
-input{
-     
+.imageContainer{
+    color: white;
+    position: relative;
+    .firstWord{
+        position: absolute;
+        transform: translate(100px, -400px);
+            }
+    .secondWord{
+        position: absolute;
+        transform: translate(100px, -200px);
+    }
 }
