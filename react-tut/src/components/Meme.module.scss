@@ -1,23 +1,55 @@
-.form{
+.form {
+  display: grid;
+  grid-template: 40px 40px/ 1fr 1fr;
+  gap: 17px;
+}
+.button {
+  grid-column: 1/-1;
+}
+.main {
+  padding: 36px;
+}
+
+.imageContainer {
     display: grid;
-    grid-template: 40px 40px/ 1fr 1fr;
-    gap: 17px;
+  color: white;
+  grid-template: 1fr /1fr 4fr 1fr;
+  position: relative;
+  text-align: center;
+  .image{
+    grid-column: 2/3;
+    height: auto;
+    width: 100%;
 }
-.button{
-    grid-column: 1/-1;
-}
-.main{
-    padding: 36px;
-}
-.imageContainer{
-    color: white;
-    position: relative;
-    .firstWord{
-        position: absolute;
-        transform: translate(100px, -400px);
-            }
-    .secondWord{
-        position: absolute;
-        transform: translate(100px, -200px);
-    }
+  .firstWord {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    font-size: 2vw;
+    grid-column: 2/3;
+    display: flex;
+    position: absolute;
+    top: 10%;
+    width: 80%;
+    height: auto;
+    overflow-wrap: anywhere;
+   
+  }
+  .secondWord {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    font-size: 2vw;
+    grid-column: 2/3;
+    display: flex;
+    position: absolute;
+    bottom: 3%;
+    width: 80%;
+    height: 100px;
+    overflow-wrap: anywhere;
+  }
 }
