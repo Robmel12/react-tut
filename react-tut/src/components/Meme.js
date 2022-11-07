@@ -1,31 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MemeStyles from "./Meme.module.scss";
 
 export default function Meme() {
   let clientID = "5msstX_t_AjzFAx9GvGCYgxd43GMAzUspzP_5aH4IO4";
   let endpoint = `https://api.unsplash.com/photos/?client_id=${clientID}`;
-  let data = [];
-  function async 
-  fetch(endpoint)
-    .then((res) => {
-      return res.json();
-    })
-    .then((jsonData) => {
-      data.push(jsonData);
-    });
-  const [photo, setphoto] = useState("second");
+  const [photoData, setPhotoData] = useState({});
+  const [photo, setPhoto] = useState("");
+  function getRandomPhoto() {
+    let randomNUM = Math.floor(Math.random() * photoData.length);
+    return photoData[randomNUM]?.urls.regular;
+  }
+
+  useEffect(() => {
+    fetch(endpoint)
+      .then((res) => res.json())
+      .then((data) => {
+        setPhotoData(data);
+      });
+  }, [endpoint]);
+  useEffect(() => {
+    setPhoto(getRandomPhoto());
+  }, [photoData]);
+  console.log(photo);
+
   const [memeWords, setMemeWords] = useState({
     firstWords: "",
     secondWords: "",
   });
-  console.log(data[0]);
   function handleChange(e) {
     const { name, value } = e.target;
     setMemeWords((prevMemeWords) => ({
       ...prevMemeWords,
       [name]: value,
     }));
-    console.log(memeWords);
   }
   function handleClick(e) {
     e.preventDefault();
@@ -55,10 +62,7 @@ export default function Meme() {
         </button>
       </form>
       <div className={MemeStyles.imageContainer}>
-        <img
-          className={MemeStyles.image}
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        />
+        <img className={MemeStyles.image} src={photo} />
         <p className={MemeStyles.firstWord}>{memeWords.firstWords}</p>
         <p className={MemeStyles.secondWord}>{memeWords.secondWords}</p>
       </div>
